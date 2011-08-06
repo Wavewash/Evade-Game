@@ -1,0 +1,180 @@
+
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\gameLogic.as
+package{import flash.display.Sprite;import flash.events.TimerEvent;import flash.text.TextField;import flash.utils.Timer;import flash.ui.Mouse;import flash.text.TextFieldAutoSize;import flash.text.TextFormat;import flash.text.TextFormatAlign;import flash.text.Font;public class gameLogic{public var bordersBlocks : Array;public var enemyBlocks : Array;public var player : playerBlock;public var updateTimer : Timer;public var updateSpeedTimer : sinceTimer;public var mainSprite : Sprite;public var gameWidth : Number;public var gameHeight : Number;public var wallWidth : Number;public var startTime : Date;public var endTime : Date;public var score_txt : TextField;public var score_format : TextFormat;public static var Arial : Class;public var gameoverCB : Function;public function gameLogic (m:Sprite);public function setGameOverCB (cb:Function) : void;public function reset () : void;public function update (e:TimerEvent) : void;public function isGameOver () : Boolean;public function draw () : void;public function getPlayTime () : Number;public function stopGame () : Number;public function startGame () : void;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\Main.as
+package{import flash.display.DisplayObject;import flash.display.Sprite;public class Main extends flash.display.Sprite{public var game : gameLogic;public var state : gameState;public function Main ();}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\gameState.as
+package{import flash.display.DisplayObject;import flash.display.Sprite;import flash.events.MouseEvent;import flash.text.TextField;import flash.text.TextFieldAutoSize;import flash.text.TextFormat;import flash.text.TextFormatAlign;import flash.text.TextFieldType;import flash.text.Font;import Web.Web;import flash.net.URLRequest;import flash.net.URLVariables;import flash.net.URLLoader;import flash.events.IOErrorEvent;import flash.events.Event;import flash.net.URLLoaderDataFormat;import flash.net.URLRequestMethod;import JSONLib.JSON;public class gameState{public var game : gameLogic;public var mainSprite : Sprite;public var titleSprite : Sprite;public var title : DisplayObject;public var titleGoButton : evadeButton;public var highscoreSprite : HighscoreLoader;public var central : Sprite;public var gameoverSprite : Sprite;public var gameover : DisplayObject;public var gameoverGoButton : evadeButton;public var score_txt : flash.text.TextField;public var highscore : DisplayObject;public var highscoreGoButton : evadeButton;public var highscoreTxtBox : TextField;public var highscoreTxtFormat : TextFormat;public var host : String;public var latestScore : Number;public function gameState (g:gameLogic, m:Sprite);public function goToEvadeCentral (e:MouseEvent) : void;public function splash (e:MouseEvent = null) : void;public function play (e:MouseEvent = null) : void;public function gameOver (score:Number) : void;public function highScoreCheck (event:Event) : void;public function sendHighscore (e:MouseEvent) : void;public function sendHighscoreComplete (event:Event) : void;private function loginHandleComplete (event:Event) : void;private function onIOError (event:IOErrorEvent) : void;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\evadeButton.as
+package{import flash.display.Shape;import flash.display.SimpleButton;import flash.display.DisplayObject;import flash.display.Sprite;import flash.text.TextField;import flash.text.TextFormat;import flash.text.TextFormatAlign;import flash.text.TextFieldAutoSize;import flash.text.TextFieldType;import flash.events.MouseEvent;public class evadeButton extends SimpleButton{private var label_str : String;public function evadeButton (labelText:String = "Submit");public function setFunction (onClick:Function) : void;public function NoFuncSet (e:MouseEvent) : void;private function createUpState () : Sprite;private function createOverState () : Sprite;private function createDownState () : Sprite;private function createLabel () : TextField;private function positionLabel (label:TextField, state:DisplayObject) : void;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\HighscoreLoader.as
+package{import flash.display.Sprite;import flash.events.Event;import flash.events.ErrorEvent;import flash.events.EventDispatcher;import flash.events.IEventDispatcher;import flash.events.ProgressEvent;import flash.events.IOErrorEvent;import flash.events.SecurityErrorEvent;import flash.events.TimerEvent;import flash.net.URLRequestMethod;import flash.utils.Timer;import flash.text.TextField;import flash.text.TextFormatAlign;import flash.text.TextFormat;import flash.text.TextFieldAutoSize;import flash.text.Font;import Math;import flash.net.URLLoader;import flash.net.URLRequest;import flash.net.URLVariables;import flash.text.TextField;import flash.text.StyleSheet;import flash.events.TimerEvent;import JSONLib.JSON;public class HighscoreLoader extends Sprite{private var external_onSuccess : Function;private var external_onFailure : Function;private var loader : URLLoader;private var urlReq : URLRequest;public var scoreTxtSprite : Sprite;public var scoreMask : Sprite;public var scoreTxtField : TextField;public var nameTxtField : TextField;public var dateTxtField : TextField;public var host : String;public var scrollTimer : Timer;public var scrollSpeed : Number;public function HighscoreLoader ();public function scroll (e:TimerEvent) : void;public function drawScore () : void;private function createLabel () : TextField;private function HandleComplete (event:Event) : void;private function onIOError (event:IOErrorEvent) : void;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\skin.as
+package{public class skin{public var UI_Title : Class;public var UI_Highscore : Class;public var UI_Gameover : Class;public var UI_Central : Class;public static var instance : skin;public function skin ();public static function getInstance () : skin;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\playerBlock.as
+package{import flash.events.MouseEvent;public class playerBlock extends block{public var alive : Boolean;public function playerBlock (ix:Number = 0, iy:Number = 0, iwidth:Number = 50, iheight:Number = 50);public function playerMove (e:MouseEvent) : void;public function setAlive (s:Boolean) : void;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\Iblock.as
+package{public interface Iblock{public function draw (color:uint = 0x0000ff) : void;public function update (playWidth:Number = 100, playHeight:Number = 100, speed:Number = 1) : void;public function collisionPoint (xP:Number, yP:Number) : Boolean;public function collisionBlock (b:block) : Boolean;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\block.as
+package{import flash.display.Sprite;public class block extends Sprite implements Iblock{public var blockWidth : Number;public var blockHeight : Number;public var xStep : Number;public var yStep : Number;public function block (ix:Number = 0, iy:Number = 0, iwidth:Number = 50, iheight:Number = 50);public function setParams (ix:Number = 0, iy:Number = 0, iwidth:Number = 50, iheight:Number = 50) : void;public function update (playWidth:Number = 100, playHeight:Number = 100, speed:Number = 1) : void;public function draw (color:uint = 0x0000ff) : void;public function collisionPoint (xP:Number, yP:Number) : Boolean;public function collisionBlock (b:block) : Boolean;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\enemy.as
+package{import flash.display.Sprite;public class enemy extends block{public function enemy (ix:Number = 0, iy:Number = 0, iwidth:Number = 50, iheight:Number = 50, ixStep:Number = 10, iyStep:Number = 10);public function setEnemyParams (ix:Number = 0, iy:Number = 0, iwidth:Number = 50, iheight:Number = 50, ixStep:Number = 10, iyStep:Number = 10) : void;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\sinceTimer.as
+package{public class sinceTimer{public var time : Date;public function sinceTimer ();public function getUpdateSince () : Number;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\JSONLib\JSON.as
+package JSONLib{/**
+* This class provides encoding and decoding of the JSON format.	 *	 * Example usage:	 * <code>	 * 		// create a JSON string from an internal object	 * 		JSON.encode( myObject );	 *	 *		// read a JSON string into an internal object	 *		var myObject:Object = JSON.decode( jsonString );	 *	</code>
+*/
+public class JSON{/**
+* Encodes a object into a JSON string.		 *		 * @param o The object to create a JSON string for		 * @return the JSON string representing o		 * @langversion ActionScript 3.0		 * @playerversion Flash 9.0		 * @tiptext
+*/
+public static function encode (o:Object) : String;/**
+* Decodes a JSON string into a native object.		 * 		 * @param s The JSON string representing the object		 * @return A native object as specified by s		 * @throw JSONParseError		 * @langversion ActionScript 3.0		 * @playerversion Flash 9.0		 * @tiptext
+*/
+public static function decode (s:String) : *;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\JSONLib\JSONDecoder.as
+package JSONLib{public class JSONDecoder{/**
+The value that will get parsed from the JSON string
+*/
+private var value : *;/**
+The tokenizer designated to read the JSON string
+*/
+private var tokenizer : JSONTokenizer;/**
+The current token from the tokenizer
+*/
+private var token : JSONToken;/**
+* Constructs a new JSONDecoder to parse a JSON string 		 * into a native object.		 *		 * @param s The JSON string to be converted		 *		into a native object		 * @langversion ActionScript 3.0		 * @playerversion Flash 9.0		 * @tiptext
+*/
+public function JSONDecoder (s:String);/**
+* Gets the internal object that was created by parsing		 * the JSON string passed to the constructor.		 *		 * @return The internal object representation of the JSON		 * 		string that was passed to the constructor		 * @langversion ActionScript 3.0		 * @playerversion Flash 9.0		 * @tiptext
+*/
+public function getValue () : *;/**
+* Returns the next token from the tokenzier reading		 * the JSON string
+*/
+private function nextToken () : JSONToken;/**
+* Attempt to parse an array
+*/
+private function parseArray () : Array;/**
+* Attempt to parse an object
+*/
+private function parseObject () : Object;/**
+* Attempt to parse a value
+*/
+private function parseValue () : Object;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\JSONLib\JSONEncoder.as
+package JSONLib{import flash.utils.describeType;public class JSONEncoder{/**
+The string that is going to represent the object we're encoding
+*/
+private var jsonString : String;/**
+* Creates a new JSONEncoder.		 *		 * @param o The object to encode as a JSON string		 * @langversion ActionScript 3.0		 * @playerversion Flash 9.0		 * @tiptext
+*/
+public function JSONEncoder (value:*);/**
+* Gets the JSON string from the encoder.		 *		 * @return The JSON string representation of the object		 * 		that was passed to the constructor		 * @langversion ActionScript 3.0		 * @playerversion Flash 9.0		 * @tiptext
+*/
+public function getString () : String;/**
+* Converts a value to it's JSON string equivalent.		 *		 * @param value The value to convert.  Could be any 		 *		type (object, number, array, etc)
+*/
+private function convertToString (value:*) : String;/**
+* Escapes a string accoding to the JSON specification.		 *		 * @param str The string to be escaped		 * @return The string with escaped special characters		 * 		according to the JSON specification
+*/
+private function escapeString (str:String) : String;/**
+* Converts an array to it's JSON string equivalent		 *		 * @param a The array to convert		 * @return The JSON string representation of <code>a</code>
+*/
+private function arrayToString (a:Array) : String;/**
+* Converts an object to it's JSON string equivalent		 *		 * @param o The object to convert		 * @return The JSON string representation of <code>o</code>
+*/
+private function objectToString (o:Object) : String;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\JSONLib\JSONParseError.as
+package JSONLib{/**
+*	 *
+*/
+public class JSONParseError extends Error{/**
+The location in the string where the error occurred
+*/
+private var _location : int;/**
+The string in which the parse error occurred
+*/
+private var _text : String;/**
+* Provides read-only access to the location variable.		 *		 * @return The location in the string where the error occurred		 * @langversion ActionScript 3.0		 * @playerversion Flash 9.0		 * @tiptext
+*/
+public function get location () : int;/**
+* Provides read-only access to the text variable.		 *		 * @return The string in which the error occurred		 * @langversion ActionScript 3.0		 * @playerversion Flash 9.0		 * @tiptext
+*/
+public function get text () : String;/**
+* Constructs a new JSONParseError.		 *		 * @param message The error message that occured during parsing		 * @langversion ActionScript 3.0		 * @playerversion Flash 9.0		 * @tiptext
+*/
+public function JSONParseError (message:String = "", location:int = 0, text:String = "");}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\JSONLib\JSONToken.as
+package JSONLib{public class JSONToken{private var _type : int;private var _value : Object;/**
+* Returns the type of the token.		 *		 * @see com.adobe.serialization.json.JSONTokenType		 * @langversion ActionScript 3.0		 * @playerversion Flash 9.0		 * @tiptext
+*/
+public function get type () : int;/**
+* Sets the type of the token.		 *		 * @see com.adobe.serialization.json.JSONTokenType		 * @langversion ActionScript 3.0		 * @playerversion Flash 9.0		 * @tiptext
+*/
+public function set type (value:int) : Void;/**
+* Gets the value of the token		 *		 * @see com.adobe.serialization.json.JSONTokenType		 * @langversion ActionScript 3.0		 * @playerversion Flash 9.0		 * @tiptext
+*/
+public function get value () : Object;/**
+* Sets the value of the token		 *		 * @see com.adobe.serialization.json.JSONTokenType		 * @langversion ActionScript 3.0		 * @playerversion Flash 9.0		 * @tiptext
+*/
+public function set value (v:Object) : Void;/**
+* Creates a new JSONToken with a specific token type and value.		 *		 * @param type The JSONTokenType of the token		 * @param value The value of the token		 * @langversion ActionScript 3.0		 * @playerversion Flash 9.0		 * @tiptext
+*/
+public function JSONToken (type:int = -1, value:Object = null);}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\JSONLib\JSONTokenizer.as
+package JSONLib{public class JSONTokenizer{/**
+The object that will get parsed from the JSON string
+*/
+private var obj : Object;/**
+The JSON string to be parsed
+*/
+private var jsonString : String;/**
+The current parsing location in the JSON string
+*/
+private var loc : int;/**
+The current character in the JSON string during parsing
+*/
+private var ch : String;/**
+* Constructs a new JSONDecoder to parse a JSON string 		 * into a native object.		 *		 * @param s The JSON string to be converted		 *		into a native object
+*/
+public function JSONTokenizer (s:String);/**
+* Gets the next token in the input sting and advances		* the character to the next character after the token
+*/
+public function getNextToken () : JSONToken;/**
+* Attempts to read a string from the input string.  Places		 * the character location at the first character after the		 * string.  It is assumed that ch is " before this method is called.		 *		 * @return the JSONToken with the string value if a string could		 *		be read.  Throws an error otherwise.
+*/
+private function readString () : JSONToken;/**
+* Attempts to read a number from the input string.  Places		 * the character location at the first character after the		 * number.		 * 		 * @return The JSONToken with the number value if a number could		 * 		be read.  Throws an error otherwise.
+*/
+private function readNumber () : JSONToken;/**
+* Reads the next character in the input		 * string and advances the character location.		 *		 * @return The next character in the input string, or		 *		null if we've read past the end.
+*/
+private function nextChar () : String;/**
+* Advances the character location past any		 * sort of white space and comments
+*/
+private function skipIgnored () : void;/**
+* Skips comments in the input string, either		 * single-line or multi-line.  Advances the character		 * to the first position after the end of the comment.
+*/
+private function skipComments () : void;/**
+* Skip any whitespace in the input string and advances		 * the character to the first character after any possible		 * whitespace.
+*/
+private function skipWhite () : void;/**
+* Determines if a character is whitespace or not.		 *		 * @return True if the character passed in is a whitespace		 *	character
+*/
+private function isWhiteSpace (ch:String) : Boolean;/**
+* Determines if a character is a digit [0-9].		 *		 * @return True if the character passed in is a digit
+*/
+private function isDigit (ch:String) : Boolean;/**
+* Determines if a character is a digit [0-9].		 *		 * @return True if the character passed in is a digit
+*/
+private function isHexDigit (ch:String) : Boolean;/**
+* Raises a parsing error with a specified message, tacking		 * on the error location and the original string.		 *		 * @param message The message indicating why the error occurred
+*/
+public function parseError (message:String) : void;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\JSONLib\JSONTokenType.as
+package JSONLib{/**
+* Class containing constant values for the different types	 * of tokens in a JSON encoded string.
+*/
+public class JSONTokenType{public static const UNKNOWN : int;public static const COMMA : int;public static const LEFT_BRACE : int;public static const RIGHT_BRACE : int;public static const LEFT_BRACKET : int;public static const RIGHT_BRACKET : int;public static const COLON : int;public static const TRUE : int;public static const FALSE : int;public static const NULL : int;public static const STRING : int;public static const NUMBER : int;}}
+#file-cache C:\Users\Mo\Desktop\evade\evade\classes\Web\Web.as
+package Web{import flash.net.navigateToURL;import flash.net.URLRequest;public class Web{public static function getURL (url:String, window:String = "_self") : void;}}

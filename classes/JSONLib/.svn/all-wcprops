@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/Wavewash/Blabber/!svn/ver/2025/evade/classes/JSONLib
+END
+JSONParseError.as
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/Wavewash/Blabber/!svn/ver/2025/evade/classes/JSONLib/JSONParseError.as
+END
+JSONDecoder.as
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/Wavewash/Blabber/!svn/ver/2025/evade/classes/JSONLib/JSONDecoder.as
+END
+JSONTokenizer.as
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/Wavewash/Blabber/!svn/ver/2025/evade/classes/JSONLib/JSONTokenizer.as
+END
+JSON.as
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/Wavewash/Blabber/!svn/ver/2025/evade/classes/JSONLib/JSON.as
+END
+JSONEncoder.as
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/Wavewash/Blabber/!svn/ver/2025/evade/classes/JSONLib/JSONEncoder.as
+END
+JSONToken.as
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/Wavewash/Blabber/!svn/ver/2025/evade/classes/JSONLib/JSONToken.as
+END
+JSONTokenType.as
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/Wavewash/Blabber/!svn/ver/2025/evade/classes/JSONLib/JSONTokenType.as
+END
